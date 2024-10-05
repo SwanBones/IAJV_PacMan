@@ -17,7 +17,7 @@ public:
 	// Sets default values for this pawn's properties
 	APacManPlayer();
 
-	int Score;
+	int Score = 0;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookUp;

@@ -13,13 +13,13 @@ APacManPlayer::APacManPlayer()
 	PrimaryActorTick.bCanEverTick = false;
 
 	// Initialisez les différents Flipbooks pour les directions de déplacement
-	//static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookUpAsset(TEXT("/Game/Flipbooks/PacManMoveUp_Flipbook"));
-	//static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookDownAsset(TEXT("/Game/Flipbooks/PacManMoveDown_Flipbook"));
+	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookUpAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Up.FB_Pacman_Up"));
+	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookDownAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Down.FB_Pacman_Down"));
 	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookLeftAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Left.FB_Pacman_Left"));
 	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookRightAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Right.FB_Pacman_Right"));
 	
-	//if (FlipbookUpAsset.Succeeded()) FlipbookUp = FlipbookUpAsset.Object;
-	//if (FlipbookDownAsset.Succeeded()) FlipbookDown = FlipbookDownAsset.Object;
+	if (FlipbookUpAsset.Succeeded()) FlipbookUp = FlipbookUpAsset.Object;
+	if (FlipbookDownAsset.Succeeded()) FlipbookDown = FlipbookDownAsset.Object;
 	if (FlipbookLeftAsset.Succeeded()) FlipbookLeft = FlipbookLeftAsset.Object;
 	if (FlipbookRightAsset.Succeeded()) FlipbookRight = FlipbookRightAsset.Object;
 }
@@ -49,8 +49,18 @@ void APacManPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void APacManPlayer::MoveUpDown(float value)
 {
+	if (value > 0.0f)  // Vers la haut
+	{
+		// Assigner un Flipbook spécifique pour l'animation du mouvement vers le haut
+		FlipbookComponent->SetFlipbook(FlipbookUp);
+	}
+	else if (value < 0.0f)  // Vers la bas
+	{
+		// Assigner un Flipbook spécifique pour l'animation du mouvement vers la bas
+		FlipbookComponent->SetFlipbook(FlipbookDown);
+	}
+	
 	FVector Direction = FVector(1.0f, 0.0f, 0.0f);
-
 	AddMovementInput(Direction, value);
 }
 
