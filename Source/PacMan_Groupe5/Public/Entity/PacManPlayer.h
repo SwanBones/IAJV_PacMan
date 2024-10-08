@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PacEntity.h"
+#include "PaperFlipbookComponent.h"
 #include "GameFramework/Pawn.h"
 #include "PacManPlayer.generated.h"
 
@@ -16,7 +17,19 @@ public:
 	// Sets default values for this pawn's properties
 	APacManPlayer();
 
-	int Score;
+	//int Score;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPaperFlipbook* FlipbookUp;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPaperFlipbook* FlipbookDown;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPaperFlipbook* FlipbookLeft;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPaperFlipbook* FlipbookRight;
 
 protected:
 	// Called when the game starts or when spawned
