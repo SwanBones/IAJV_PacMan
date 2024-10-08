@@ -35,6 +35,7 @@ void APacManPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	AddMovementInput(CurrentDirection, 1.0);
 }
 
 // Called to bind functionality to input
@@ -52,16 +53,17 @@ void APacManPlayer::MoveUpDown(float value)
 	{
 		// Assigner un Flipbook spécifique pour l'animation du mouvement vers le haut
 		FlipbookComponent->SetFlipbook(FlipbookUp);
+		CurrentDirection = FVector(0.0f, -1.0f, 0.0f);
 	}
 	else if (value > 0.0f)  // Vers la bas
 	{
 		// Assigner un Flipbook spécifique pour l'animation du mouvement vers la bas
 		FlipbookComponent->SetFlipbook(FlipbookDown);
+		CurrentDirection = FVector(0.0f, 1.0f, 0.0f);
 	}
 	
-	FVector Direction = FVector(0.0f, 1.0f, 0.0f);
-
-	AddMovementInput(Direction, value);
+	// FVector Direction = FVector(0.0f, 1.0f, 0.0f);
+	// AddMovementInput(Direction, value);
 }
 
 void APacManPlayer::MoveLeftRight(float value)
@@ -70,15 +72,16 @@ void APacManPlayer::MoveLeftRight(float value)
 	{
 		// Assigner un Flipbook spécifique pour l'animation du mouvement vers la droite
 		FlipbookComponent->SetFlipbook(FlipbookRight);
+		CurrentDirection = FVector(1.0f, 0.0f, 0.0f);
 	}
 	else if (value < 0.0f)  // Vers la gauche
 	{
 		// Assigner un Flipbook spécifique pour l'animation du mouvement vers la gauche
 		FlipbookComponent->SetFlipbook(FlipbookLeft);
+		CurrentDirection = FVector(-1.0f, 0.0f, 0.0f);
 	}
 	
-	FVector Direction = FVector(1.0f, 0.0f, 0.0f);
-
-	AddMovementInput(Direction, value);
+	// FVector Direction = FVector(1.0f, 0.0f, 0.0f);
+	// AddMovementInput(Direction, value);
 }
 

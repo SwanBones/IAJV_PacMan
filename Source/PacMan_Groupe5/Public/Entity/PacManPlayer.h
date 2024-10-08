@@ -19,6 +19,8 @@ public:
 
 	//int Score;
 
+	FVector CurrentDirection = FVector(1.0f, 0.0f, 0.0f);
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookUp;
 	
