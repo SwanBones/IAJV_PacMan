@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PaperFlipbook.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/Pawn.h"
 #include "PacEntity.generated.h"
@@ -26,6 +27,18 @@ public:
 	UPROPERTY(Category = Pawn,  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UPawnMovementComponent* MovementComponent;
 
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	class UPaperFlipbook* FlipbookUp;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	class UPaperFlipbook* FlipbookDown;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	class UPaperFlipbook* FlipbookLeft;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	class UPaperFlipbook* FlipbookRight;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

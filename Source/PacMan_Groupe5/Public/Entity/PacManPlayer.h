@@ -19,17 +19,7 @@ public:
 
 	int Score = 0;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FlipbookUp;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FlipbookDown;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FlipbookLeft;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FlipbookRight;
 	
 protected:
 	// Called when the game starts or when spawned
