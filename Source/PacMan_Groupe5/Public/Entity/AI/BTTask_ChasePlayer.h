@@ -17,6 +17,9 @@ class PACMAN_GROUPE5_API UBTTask_ChasePlayer : public UBTTask_BlackboardBase
 public:
 	UBTTask_ChasePlayer();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Description")
+	float distance_ahead;
+
 private:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 	virtual FString GetStaticDescription() const override;

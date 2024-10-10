@@ -8,7 +8,7 @@
 
 UBTTaskNode_ChasePlayer::UBTTaskNode_ChasePlayer()
 {
-	NodeName = "Find Pacman";
+	NodeName = "Find Pacman DEPRECATED";
 }
 
 EBTNodeResult::Type UBTTaskNode_ChasePlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
