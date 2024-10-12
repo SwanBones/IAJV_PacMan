@@ -33,10 +33,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookRight;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score")
+	int Score;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	UFUNCTION()
+	void OnOverlap(AActor* MyActor, AActor* OtherActor);
+
+	UFUNCTION()
+	void OnEndOverlap(AActor* MyActor, AActor* OtherActor);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
