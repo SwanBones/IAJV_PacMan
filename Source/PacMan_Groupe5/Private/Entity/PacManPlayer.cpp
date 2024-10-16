@@ -4,6 +4,7 @@
 #include "Entity/PacManPlayer.h"
 #include "PaperFlipbook.h"
 #include "PaperFlipbookComponent.h"
+#include <Entity/Pac_Gomme.h>
 
 // Sets default values
 APacManPlayer::APacManPlayer()
@@ -27,14 +28,32 @@ APacManPlayer::APacManPlayer()
 void APacManPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	// Bind function OnActorBeginOverlap with your class function OnOverlap
+	this->OnActorBeginOverlap.AddDynamic(this, &APacManPlayer::OnOverlap);
+
+	// Bind function OnActorBeginOverlap with your class function EndOverlap
+	this->OnActorEndOverlap.AddDynamic(this, &APacManPlayer::OnEndOverlap);
+	Score = 0;
+}
+
+void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
+{
+	if (auto gomme = Cast<APac_Gomme>(OtherActor)) {
+		Score += gomme->giveScore();
+		if (gomme->getIsSuper()) {
+			//ajouter killmode
+		}
+	}
+}
+
+void APacManPlayer::OnEndOverlap(AActor* MyActor, AActor* OtherActor)
+{
 }
 
 // Called every frame
 void APacManPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	AddMovementInput(CurrentDirection, 1.0);
 }
 
