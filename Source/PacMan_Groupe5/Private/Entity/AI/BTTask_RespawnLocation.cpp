@@ -26,7 +26,7 @@ EBTNodeResult::Type UBTTask_RespawnLocation::ExecuteTask(UBehaviorTreeComponent&
 	const UNavigationSystemV1* NavSystem {UNavigationSystemV1::GetCurrent(GetWorld())};
 	if(IsValid(NavSystem) && NavSystem->GetRandomPointInNavigableRadius(TargetPosition, 75.0, Location))
 	{
-		AIController->GetBlackboardComponent()->SetValueAsVector("RespawnLocation", Location.Location);
+		AIController->GetBlackboardComponent()->SetValueAsVector("TargetLocation", Location.Location);
 	}
 
 	// Signal the BehaviorTreeComponent that the task finished with a Success!
