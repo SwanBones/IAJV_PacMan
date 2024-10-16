@@ -6,6 +6,9 @@
 #include "PaperFlipbookComponent.h"
 #include <Entity/Pac_Gomme.h>
 
+#include "EngineUtils.h"
+#include "Entity/Ghost.h"
+
 // Sets default values
 APacManPlayer::APacManPlayer()
 {
@@ -42,6 +45,16 @@ void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 		Score += gomme->giveScore();
 		if (gomme->getIsSuper()) {
 			//ajouter killmode
+			// Parcours tous les fantômes dans la scène
+			for (TActorIterator<AGhost> GhostItr(GetWorld()); GhostItr; ++GhostItr)
+			{
+				AGhost* Ghost = *GhostItr;
+				if (Ghost)
+				{
+					// Appelle la méthode qui gère l'état effrayé (si nécessaire)
+					Ghost->SetFrightenMode();
+				}
+			}
 		}
 	}
 }

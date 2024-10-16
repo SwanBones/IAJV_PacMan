@@ -16,6 +16,7 @@ void AGhost::SetAliveMode()
 {
 	IsDead = false;
 	IsFrightened = false;
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("SetAlive"));
 
 	// Récupère l'AIController pour mettre à jour le Blackboard
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
@@ -47,6 +48,7 @@ void AGhost::SetDeadMode()
 void AGhost::SetFrightenMode()
 {
 	IsFrightened = true;
+	GetWorld()->GetTimerManager().SetTimer(FrightenedTimerHandle, this, &AGhost::SetAliveMode, 5.0, false);
 
 	// Récupère l'AIController pour mettre à jour le Blackboard
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
@@ -68,5 +70,4 @@ void AGhost::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompone
 void AGhost::BeginPlay()
 {
 	Super::BeginPlay();
-	SetFrightenMode();
 }

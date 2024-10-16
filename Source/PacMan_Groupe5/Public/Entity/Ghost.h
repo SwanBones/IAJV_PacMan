@@ -38,6 +38,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	FTimerHandle FrightenedTimerHandle;
 	// UFUNCTION()
 	// void OnOverlap(AActor* MyActor, AActor* OtherActor);
 	
