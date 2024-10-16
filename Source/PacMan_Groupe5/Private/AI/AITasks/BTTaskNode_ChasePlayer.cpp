@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Entity/AI/BTTaskNode_ChasePlayer.h"
+#include "../../../Public/Entity/AITasks"
 
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"

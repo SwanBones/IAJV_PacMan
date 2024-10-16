@@ -1,8 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Entity/AI/BTTask_ChasePlayer.h"
-
+#include "AI/AITasks/BTTask_ChasePlayer.h"
 #include "AIController.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"

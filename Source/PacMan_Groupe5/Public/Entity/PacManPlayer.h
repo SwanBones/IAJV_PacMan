@@ -21,16 +21,16 @@ public:
 
 	FVector CurrentDirection = FVector(1.0f, 0.0f, 0.0f);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookUp;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookDown;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookLeft;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookRight;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score")

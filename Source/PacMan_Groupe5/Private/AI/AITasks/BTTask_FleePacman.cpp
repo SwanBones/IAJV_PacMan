@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Entity/AI/BTTask_FleePacman.h"
+#include "../../../Public/Entity/AITasks"
 
 #include "AIController.h"
 #include "NavigationSystem.h"
