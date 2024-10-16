@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
-#include "BTTask_FindRandomLocation.generated.h"
+#include "BTTask_OrgangeGhostChasePlayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PACMAN_GROUPE5_API UBTTask_FindRandomLocation : public UBTTask_BlackboardBase
+class PACMAN_GROUPE5_API UBTTask_OrgangeGhostChasePlayer : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 
 public:
-	UBTTask_FindRandomLocation();
+	UBTTask_OrgangeGhostChasePlayer();
 
 private:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
