@@ -1,22 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "AI/AITasks/GhostsBehavior/BTTask_OrgangeGhostChasePlayer.h"
 
-#include "../../../Public/Entity/AITasks"
 #include "AIController.h"
 #include <msctf.h>
-
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-UBTTask_FindRandomLocation::UBTTask_FindRandomLocation()
+UBTTask_OrgangeGhostChasePlayer::UBTTask_OrgangeGhostChasePlayer()
 {
-	NodeName = TEXT("Find Random Location");
+	NodeName = TEXT("Orange Ghost Chase Player");
 
 	// accept only vectors
-	BlackboardKey.AddVectorFilter(this,GET_MEMBER_NAME_CHECKED(UBTTask_FindRandomLocation, BlackboardKey));
+	BlackboardKey.AddVectorFilter(this,GET_MEMBER_NAME_CHECKED(UBTTask_OrgangeGhostChasePlayer, BlackboardKey));
 }
 
-EBTNodeResult::Type UBTTask_FindRandomLocation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UBTTask_OrgangeGhostChasePlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	FNavLocation Location{};
 
@@ -39,7 +38,7 @@ EBTNodeResult::Type UBTTask_FindRandomLocation::ExecuteTask(UBehaviorTreeCompone
 	return EBTNodeResult::Succeeded;
 }
 
-FString UBTTask_FindRandomLocation::GetStaticDescription() const
+FString UBTTask_OrgangeGhostChasePlayer::GetStaticDescription() const
 {
 	return FString::Printf(TEXT("Vector: %s"), *BlackboardKey.SelectedKeyName.ToString());
 }

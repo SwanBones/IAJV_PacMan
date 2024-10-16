@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../../../Public/Entity/AITasks"
+#include "AI/AITasks/BTTask_FleePacman.h"
 
 #include "AIController.h"
 #include "NavigationSystem.h"
@@ -10,7 +10,7 @@
 
 UBTTask_FleePacman::UBTTask_FleePacman()
 {
-	NodeName = TEXT("Flee Pacman");
+	NodeName = TEXT("Find Flee Pacman Location");
 
 	// accept only vectors
 	//BlackboardKey.AddVectorFilter(this,GET_MEMBER_NAME_CHECKED(UBTTask_ChasePlayer, BlackboardKey));

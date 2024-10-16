@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AI/AITasks/BTTask_ChasePlayer.h"
+#include "AI/AITasks/GhostsBehavior/BTTask_PinkGhostChasePlayer.h"
+
 #include "AIController.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
@@ -10,17 +11,17 @@
 
 class APacManPlayer;
 
-UBTTask_ChasePlayer::UBTTask_ChasePlayer()
+UBTTask_PinkGhostChasePlayer::UBTTask_PinkGhostChasePlayer()
 {
-	NodeName = TEXT("Find Pacman");
+	NodeName = TEXT("Pink Ghost Chase Player");
 
 	distance_ahead = 1000.0f;
 
 	// accept only vectors
-	BlackboardKey.AddVectorFilter(this,GET_MEMBER_NAME_CHECKED(UBTTask_ChasePlayer, BlackboardKey));
+	BlackboardKey.AddVectorFilter(this,GET_MEMBER_NAME_CHECKED(UBTTask_PinkGhostChasePlayer, BlackboardKey));
 }
 
-EBTNodeResult::Type UBTTask_ChasePlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UBTTask_PinkGhostChasePlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	FNavLocation Location{};
 
@@ -51,7 +52,7 @@ EBTNodeResult::Type UBTTask_ChasePlayer::ExecuteTask(UBehaviorTreeComponent& Own
 	return EBTNodeResult::Succeeded;
 }
 
-FString UBTTask_ChasePlayer::GetStaticDescription() const
+FString UBTTask_PinkGhostChasePlayer::GetStaticDescription() const
 {
 	return FString::Printf(TEXT("Vector: %s"), *BlackboardKey.SelectedKeyName.ToString());
 }

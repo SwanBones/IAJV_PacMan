@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
-#include "BTTask_ChasePlayer.generated.h"
+#include "BTTask_PinkGhostChasePlayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PACMAN_GROUPE5_API UBTTask_ChasePlayer : public UBTTask_BlackboardBase
+class PACMAN_GROUPE5_API UBTTask_PinkGhostChasePlayer : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 
 public:
-	UBTTask_ChasePlayer();
+	UBTTask_PinkGhostChasePlayer();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Description")
 	float distance_ahead;
