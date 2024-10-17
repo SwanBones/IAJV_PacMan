@@ -42,19 +42,16 @@ public:
 	
 	// FrightenFlipbook
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FrightenFlipbookUp;
+	UPaperFlipbook* FrightenFlipbook;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FrightenFlipbookDown;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FrightenFlipbookLeft;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
-	UPaperFlipbook* FrightenFlipbookRight;
+	UPaperFlipbook* FrightenFlipbookFinal;
 	
 	bool IsDead;
 	bool IsFrightened;
 
 	// Public methods
 	void SetAliveMode();
+	void SetAliveTimer();
 	void SetDeadMode();
 	void SetFrightenMode();
 
@@ -66,8 +63,8 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	FTimerHandle FrightenedTimerHandle;
-	// UFUNCTION()
-	// void OnOverlap(AActor* MyActor, AActor* OtherActor);
+	FTimerHandle TimerHandle;
+	UFUNCTION()
+	void OnOverlap(AActor* MyActor, AActor* OtherActor);
 	
 };

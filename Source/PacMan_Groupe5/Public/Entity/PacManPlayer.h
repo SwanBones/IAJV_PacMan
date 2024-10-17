@@ -17,8 +17,6 @@ public:
 	// Sets default values for this pawn's properties
 	APacManPlayer();
 
-	//int Score;
-
 	FVector CurrentDirection = FVector(1.0f, 0.0f, 0.0f);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")

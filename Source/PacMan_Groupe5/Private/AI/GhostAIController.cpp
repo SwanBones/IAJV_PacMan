@@ -4,6 +4,7 @@
 
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Entity/Ghost.h"
 
 AGhostAIController::AGhostAIController()
 {
@@ -32,4 +33,19 @@ void AGhostAIController::OnPossess(APawn* InPawn)
 	}
 }
 
+void AGhostAIController::OnMoveCompleted(const FAIRequestID RequestID, const FPathFollowingResult& Result)
+{
+	Super::OnMoveCompleted(RequestID, Result);
 
+	// Récupère le Pawn (le fantôme) contrôlé par ce contrôleur AI
+	if (APawn* ControlledPawn = GetPawn())
+	{
+		// Cast le Pawn en AGhost pour accéder à ses méthodes et propriétés
+		AGhost* MyGhost = Cast<AGhost>(ControlledPawn);
+		if (MyGhost && MyGhost->IsDead)
+		{
+			// Le fantôme est mort et vient de terminer son mouvement vers le point de respawn
+			MyGhost->SetAliveMode();  // Remettre le fantôme en mode "Alive"
+		}
+	}
+}
