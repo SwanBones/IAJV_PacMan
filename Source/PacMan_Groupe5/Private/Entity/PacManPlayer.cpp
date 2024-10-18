@@ -6,22 +6,17 @@
 #include "PaperFlipbookComponent.h"
 #include <Entity/Pac_Gomme.h>
 
+#include "EngineUtils.h"
+#include "Entity/Ghost.h"
+
+#include "Kismet/GameplayStatics.h"
+#include "Screens/GameOverScreen.h"
+
 // Sets default values
 APacManPlayer::APacManPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	// Initialisez les différents Flipbooks pour les directions de déplacement
-	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookUpAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Up.FB_Pacman_Up"));
-	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookDownAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Down.FB_Pacman_Down"));
-	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookLeftAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Left.FB_Pacman_Left"));
-	static ConstructorHelpers::FObjectFinder<UPaperFlipbook> FlipbookRightAsset(TEXT("/Game/Assets/Pacman/FB_Pacman_Right.FB_Pacman_Right"));
-	
-	if (FlipbookUpAsset.Succeeded()) FlipbookUp = FlipbookUpAsset.Object;
-	if (FlipbookDownAsset.Succeeded()) FlipbookDown = FlipbookDownAsset.Object;
-	if (FlipbookLeftAsset.Succeeded()) FlipbookLeft = FlipbookLeftAsset.Object;
-	if (FlipbookRightAsset.Succeeded()) FlipbookRight = FlipbookRightAsset.Object;
 }
 
 // Called when the game starts or when spawned
@@ -34,14 +29,54 @@ void APacManPlayer::BeginPlay()
 	// Bind function OnActorBeginOverlap with your class function EndOverlap
 	this->OnActorEndOverlap.AddDynamic(this, &APacManPlayer::OnEndOverlap);
 	Score = 0;
+
+	// Compte le nombre de Pac-Gommes dans la scène
+	TArray<AActor*> PacGumActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APac_Gomme::StaticClass(), PacGumActors);
+
+	TotalPacGumCount = PacGumActors.Num(); // Stocke le total dans la variable
+	// Affiche le nombre total de Pac-Gommes sur l'écran de débogage
+	FString Message = FString::Printf(TEXT("Total de Pac-Gommes dans la scène : %d"), TotalPacGumCount);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
 }
 
 void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 {
 	if (auto gomme = Cast<APac_Gomme>(OtherActor)) {
 		Score += gomme->giveScore();
+		PacGumCount++;
+		// FString Message = FString::Printf(TEXT("Nombre de PacGum manger : %d"), PacGumCount);
+		// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
+		
 		if (gomme->getIsSuper()) {
-			//ajouter killmode
+			// Parcours tous les fantômes dans la scène
+			for (TActorIterator<AGhost> GhostItr(GetWorld()); GhostItr; ++GhostItr)
+			{
+				AGhost* Ghost = *GhostItr;
+				if (Ghost)
+				{
+					// Appelle la méthode qui gère l'état effrayé (si nécessaire)
+					Ghost->SetFrightenMode();
+				}
+			}
+		}
+		else if (PacGumCount >= TotalPacGumCount)
+		{
+			if (WinScreenClass) // Vérifie que le widget est bien assigné
+			{
+				APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+				if (PlayerController)
+				{
+					UGameOverScreen* WinScreen = CreateWidget<UGameOverScreen>(PlayerController, WinScreenClass);
+					if (WinScreen)
+					{
+						WinScreen->UpdateScore(Score);
+						WinScreen->AddToViewport();  // Ajoute le widget à l'interface
+						UGameplayStatics::SetGamePaused(this, true);
+						PlayerController->bShowMouseCursor = true;  // Affiche le curseur de la souris
+					}
+				}
+			}
 		}
 	}
 }
@@ -102,5 +137,30 @@ void APacManPlayer::MoveLeftRight(float value)
 	
 	// FVector Direction = FVector(1.0f, 0.0f, 0.0f);
 	// AddMovementInput(Direction, value);
+}
+
+void APacManPlayer::LoseLife()
+{
+	Lives--;
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("LoseLife"));
+	if (Lives <= 0)
+	{
+		if (GameOverScreenClass) // Vérifie que le widget est bien assigné
+		{
+			APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+			if (PlayerController)
+			{
+				UGameOverScreen* GameOverScreen = CreateWidget<UGameOverScreen>(PlayerController, GameOverScreenClass);
+				if (GameOverScreen)
+				{
+					GameOverScreen->UpdateScore(Score);
+					GameOverScreen->AddToViewport();  // Ajoute le widget à l'interface
+					UGameplayStatics::SetGamePaused(this, true);
+					PlayerController->bShowMouseCursor = true;  // Affiche le curseur de la souris
+				}
+			}
+		}
+	}
+	
 }
 
