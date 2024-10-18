@@ -6,6 +6,7 @@
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 #include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 APacEntity::APacEntity()
@@ -14,8 +15,10 @@ APacEntity::APacEntity()
 	PrimaryActorTick.bCanEverTick = false;
 
 	// Create BoxComponent and set as RootComponent for the Actor
-	BoxCollision = CreateDefaultSubobject<UBoxComponent>("BoxCollision");
-	RootComponent = BoxCollision;
+	// BoxCollision = CreateDefaultSubobject<UBoxComponent>("BoxCollision");
+	// RootComponent = BoxCollision;
+	SphereCollision = CreateDefaultSubobject<USphereComponent>("SphereCollision");
+	RootComponent = SphereCollision;
 
 	// Create StaticMeshComponent and Attach to BoxComponent
 	// StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
@@ -23,10 +26,10 @@ APacEntity::APacEntity()
 
 	// Create FlipbookComponent and attach to BoxComponent
 	FlipbookComponent = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("FlipbookComponent"));
-	FlipbookComponent->SetupAttachment(BoxCollision);
+	FlipbookComponent->SetupAttachment(SphereCollision);
 	
 	MovementComponent = CreateDefaultSubobject<UPawnMovementComponent, UFloatingPawnMovement>(TEXT("MovementComponent0"));
-	MovementComponent->UpdatedComponent = BoxCollision;
+	MovementComponent->UpdatedComponent = SphereCollision;
 }
 
 // Called when the game starts or when spawned

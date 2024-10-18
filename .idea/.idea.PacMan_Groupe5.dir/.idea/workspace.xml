@@ -8,9 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9102d8b4-eb35-4455-85b3-555892a0bfbd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PacMan_Groupe5.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PacMan_Groupe5.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PacMan_Groupe5.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PacMan_Groupe5.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PacManPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PacManPlayer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/PacMan_Groupe5/Private/Entity/PacEntity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/PacMan_Groupe5/Private/Entity/PacEntity.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/PacMan_Groupe5/Private/Entity/PacManPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/PacMan_Groupe5/Private/Entity/PacManPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/PacMan_Groupe5/Public/Entity/PacEntity.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/PacMan_Groupe5/Public/Entity/PacEntity.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/PacMan_Groupe5/Public/Entity/PacManPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/PacMan_Groupe5/Public/Entity/PacManPlayer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,7 +155,7 @@
       <workItem from="1729121150245" duration="9240000" />
       <workItem from="1729184085400" duration="5570000" />
       <workItem from="1729206051437" duration="6497000" />
-      <workItem from="1729214815655" duration="2597000" />
+      <workItem from="1729214815655" duration="3936000" />
     </task>
     <task id="LOCAL-00001" summary="feat(pink_ghost) : ajout des tâches de fuite et de respawn">
       <option name="closed" value="true" />

@@ -31,6 +31,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animations")
 	UPaperFlipbook* FlipbookRight;
 
+	UPROPERTY(EditAnywhere, Category = "Audio")
+	USoundBase* PacGumSound1;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+	USoundBase* PacGumSound2;
+
+	bool PacGumUsingFirstSound;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score")
 	int Score = 0;
 

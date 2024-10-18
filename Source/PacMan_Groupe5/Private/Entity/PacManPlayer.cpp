@@ -19,6 +19,8 @@ APacManPlayer::APacManPlayer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	IsStarted = false;
+
+	PacGumUsingFirstSound = true;
 }
 
 // Called when the game starts or when spawned
@@ -49,6 +51,18 @@ void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 		PacGumCount++;
 		// FString Message = FString::Printf(TEXT("Nombre de PacGum manger : %d"), PacGumCount);
 		// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
+
+		if (PacGumUsingFirstSound && PacGumSound1)
+		{
+			UGameplayStatics::PlaySound2D(this, PacGumSound1);
+		}
+		else if (PacGumSound2)
+		{
+			UGameplayStatics::PlaySound2D(this, PacGumSound2);
+		}
+
+		// Alterner le son pour la prochaine fois
+		PacGumUsingFirstSound = !PacGumUsingFirstSound;
 		
 		if (gomme->getIsSuper()) {
 			// Parcours tous les fantômes dans la scène

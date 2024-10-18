@@ -13,9 +13,12 @@ class PACMAN_GROUPE5_API APacEntity : public APawn
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere)
-	class UBoxComponent* BoxCollision;
+	// UPROPERTY(EditAnywhere)
+	// class UBoxComponent* BoxCollision;
 
+	UPROPERTY(EditAnywhere)
+	class USphereComponent* SphereCollision;
+	
 	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	// class UStaticMeshComponent* StaticMesh;
 	
