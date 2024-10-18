@@ -13,8 +13,13 @@ class PACMAN_GROUPE5_API UGameOverScreen : public UUserWidget
 
 public:
 	virtual void NativeConstruct() override;
+	
+	void UpdateScore(int FinalScore);
 
 protected:
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* Score;
+
 	UPROPERTY(meta = (BindWidget))
 	class UButton* RestartButton;
 

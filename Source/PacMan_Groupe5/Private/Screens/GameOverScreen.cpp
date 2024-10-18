@@ -22,6 +22,14 @@ void UGameOverScreen::NativeConstruct()
 	}
 }
 
+void UGameOverScreen::UpdateScore(const int FinalScore)
+{
+	if (Score)
+	{
+		Score->SetText(FText::FromString(FString::Printf(TEXT("Your Score : %d"), FinalScore)));
+	}
+}
+
 void UGameOverScreen::OnRestartButtonClicked()
 {
 	// Recharge le niveau actuel pour redémarrer le jeu
