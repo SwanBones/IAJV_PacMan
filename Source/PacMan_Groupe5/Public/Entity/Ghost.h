@@ -54,6 +54,7 @@ public:
 	void SetAliveTimer();
 	void SetDeadMode();
 	void SetFrightenMode();
+	void SetFinalFrightenAnimation();
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

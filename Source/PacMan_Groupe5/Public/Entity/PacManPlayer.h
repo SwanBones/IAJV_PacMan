@@ -45,6 +45,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<class UGameOverScreen> GameOverScreenClass;
 
+	// Classe du widget Win
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<class UGameOverScreen> WinScreenClass;
+
 private:
 	UFUNCTION()
 	void OnOverlap(AActor* MyActor, AActor* OtherActor);

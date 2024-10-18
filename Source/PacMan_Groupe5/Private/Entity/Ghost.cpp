@@ -23,6 +23,8 @@ void AGhost::SetAliveMode()
 	FlipbookComponent->SetFlipbook(BaseFlipbookRight);
 	// Clear TimerHandler
 	GetWorldTimerManager().ClearTimer(TimerHandle);
+	UFloatingPawnMovement* FloatingMovement = Cast<UFloatingPawnMovement>(MovementComponent);
+	FloatingMovement->MaxSpeed = 900.0f;
 	// Debug message for test purpose
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("SetAlive"));
 
@@ -38,6 +40,7 @@ void AGhost::SetAliveMode()
 	} 
 }
 
+// DEPRECATED 
 void AGhost::SetAliveTimer()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandle);
@@ -54,6 +57,9 @@ void AGhost::SetDeadMode()
 	FlipbookComponent->SetFlipbook(DeadFlipbookRight);
 	// Clear timer so don't come back alive in middle of comming back to respawn
 	GetWorldTimerManager().ClearTimer(TimerHandle);
+	UFloatingPawnMovement* FloatingMovement = Cast<UFloatingPawnMovement>(MovementComponent);
+	FloatingMovement->MaxSpeed = 1200.0f;
+	
 
 	// Récupère l'AIController pour mettre à jour le Blackboard
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
@@ -77,7 +83,9 @@ void AGhost::SetFrightenMode()
 	// Set animation to frighten
 	FlipbookComponent->SetFlipbook(FrightenFlipbook);
 	// Set timer of 5s wich will call SetAliveMode()
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AGhost::SetAliveMode, 5.0f, false);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AGhost::SetFinalFrightenAnimation, 7.0f, false);
+	UFloatingPawnMovement* FloatingMovement = Cast<UFloatingPawnMovement>(MovementComponent);
+	FloatingMovement->MaxSpeed = 600.0f;
 
 	// Récupère l'AIController pour mettre à jour le Blackboard
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
@@ -92,6 +100,13 @@ void AGhost::SetFrightenMode()
 	} 
 }
 
+void AGhost::SetFinalFrightenAnimation()
+{
+	FlipbookComponent->SetFlipbook(FrightenFlipbookFinal);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AGhost::SetAliveMode, 3.0f, false);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("SetFinalAnimation"));
+}
+
 void AGhost::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -100,7 +115,7 @@ void AGhost::SetupPlayerInputComponent(class UInputComponent* PlayerInputCompone
 void AGhost::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	// Bind function OnActorBeginOverlap with your class function OnOverlap
 	this->OnActorBeginOverlap.AddDynamic(this, &AGhost::OnOverlap);
 }
@@ -113,10 +128,9 @@ void AGhost::OnOverlap(AActor* MyActor, AActor* OtherActor)
 		{
 			SetDeadMode();
 		}
-		else
+		else if (!IsDead && !IsFrightened)
 		{
-			// TODO: kill Pacman
-			//Pacman->LoseLife();
+			Pacman->LoseLife(); // need to add animation & respawn to middle
 		}
 	}
 }

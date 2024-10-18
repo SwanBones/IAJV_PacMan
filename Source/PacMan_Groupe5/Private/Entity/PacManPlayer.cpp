@@ -45,8 +45,8 @@ void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 	if (auto gomme = Cast<APac_Gomme>(OtherActor)) {
 		Score += gomme->giveScore();
 		PacGumCount++;
-		FString Message = FString::Printf(TEXT("Nombre de PacGum manger : %d"), PacGumCount);
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
+		// FString Message = FString::Printf(TEXT("Nombre de PacGum manger : %d"), PacGumCount);
+		// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
 		
 		if (gomme->getIsSuper()) {
 			// Parcours tous les fantômes dans la scène
@@ -62,15 +62,16 @@ void APacManPlayer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 		}
 		else if (PacGumCount >= TotalPacGumCount)
 		{
-			if (GameOverScreenClass) // Vérifie que le widget est bien assigné
+			if (WinScreenClass) // Vérifie que le widget est bien assigné
 			{
 				APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 				if (PlayerController)
 				{
-					UGameOverScreen* GameOverScreen = CreateWidget<UGameOverScreen>(PlayerController, GameOverScreenClass);
-					if (GameOverScreen)
+					UGameOverScreen* WinScreen = CreateWidget<UGameOverScreen>(PlayerController, WinScreenClass);
+					if (WinScreen)
 					{
-						GameOverScreen->AddToViewport();  // Ajoute le widget à l'interface
+						WinScreen->UpdateScore(Score);
+						WinScreen->AddToViewport();  // Ajoute le widget à l'interface
 						UGameplayStatics::SetGamePaused(this, true);
 						PlayerController->bShowMouseCursor = true;  // Affiche le curseur de la souris
 					}
@@ -152,6 +153,7 @@ void APacManPlayer::LoseLife()
 				UGameOverScreen* GameOverScreen = CreateWidget<UGameOverScreen>(PlayerController, GameOverScreenClass);
 				if (GameOverScreen)
 				{
+					GameOverScreen->UpdateScore(Score);
 					GameOverScreen->AddToViewport();  // Ajoute le widget à l'interface
 					UGameplayStatics::SetGamePaused(this, true);
 					PlayerController->bShowMouseCursor = true;  // Affiche le curseur de la souris
