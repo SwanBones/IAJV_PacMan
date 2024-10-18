@@ -55,6 +55,8 @@ private:
 
 	UFUNCTION()
 	void OnEndOverlap(AActor* MyActor, AActor* OtherActor);
+
+	bool IsStarted;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -17,6 +17,8 @@ APacManPlayer::APacManPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	IsStarted = false;
 }
 
 // Called when the game starts or when spawned
@@ -89,7 +91,11 @@ void APacManPlayer::OnEndOverlap(AActor* MyActor, AActor* OtherActor)
 void APacManPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AddMovementInput(CurrentDirection, 1.0);
+	if(IsStarted)
+	{
+		AddMovementInput(CurrentDirection, 1.0);
+	}
+	
 }
 
 // Called to bind functionality to input
@@ -102,6 +108,50 @@ void APacManPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 }
 
 void APacManPlayer::MoveUpDown(float value)
+{
+	// Vérifiez si le jeu a commencé
+	if (!IsStarted && value != 0.0f) {
+		IsStarted = true; // Marquez le jeu comme commencé
+	}
+
+	// Ne mettez à jour la direction et les animations que si le jeu a commencé
+	if (IsStarted) {
+		if (value < 0.0f)  // Vers le haut
+		{
+			FlipbookComponent->SetFlipbook(FlipbookUp);
+			CurrentDirection = FVector(0.0f, -1.0f, 0.0f);
+		}
+		else if (value > 0.0f)  // Vers le bas
+		{
+			FlipbookComponent->SetFlipbook(FlipbookDown);
+			CurrentDirection = FVector(0.0f, 1.0f, 0.0f);
+		}
+	}
+}
+
+void APacManPlayer::MoveLeftRight(float value)
+{
+	// Vérifiez si le jeu a commencé
+	if (!IsStarted && value != 0.0f) {
+		IsStarted = true; // Marquez le jeu comme commencé
+	}
+
+	// Ne mettez à jour la direction et les animations que si le jeu a commencé
+	if (IsStarted) {
+		if (value > 0.0f)  // Vers la droite
+		{
+			FlipbookComponent->SetFlipbook(FlipbookRight);
+			CurrentDirection = FVector(1.0f, 0.0f, 0.0f);
+		}
+		else if (value < 0.0f)  // Vers la gauche
+		{
+			FlipbookComponent->SetFlipbook(FlipbookLeft);
+			CurrentDirection = FVector(-1.0f, 0.0f, 0.0f);
+		}
+	}
+}
+
+/*void APacManPlayer::MoveUpDown(float value)
 {
 	if (value < 0.0f)  // Vers la haut
 	{
@@ -137,7 +187,7 @@ void APacManPlayer::MoveLeftRight(float value)
 	
 	// FVector Direction = FVector(1.0f, 0.0f, 0.0f);
 	// AddMovementInput(Direction, value);
-}
+}*/
 
 void APacManPlayer::LoseLife()
 {
