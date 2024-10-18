@@ -7,11 +7,7 @@
 		{
 			"Name": "PacMan_Groupe5",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"AIModule"
-			]
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
@@ -21,10 +17,6 @@
 			"TargetAllowList": [
 				"Editor"
 			]
-		},
-		{
-			"Name": "StaticMeshEditorModeling",
-			"Enabled": true
 		}
 	]
 }
