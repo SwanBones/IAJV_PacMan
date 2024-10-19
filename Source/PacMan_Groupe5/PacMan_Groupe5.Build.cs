@@ -8,9 +8,9 @@ public class PacMan_Groupe5 : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Paper2D", "AIModule", "NavigationSystem" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Paper2D", "UMG" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D"});
+		PrivateDependencyModuleNames.AddRange(new string[] {  "AiModule", "NavigationSystem", "Slate", "SlateCore"});
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

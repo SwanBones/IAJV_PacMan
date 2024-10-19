@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PaperFlipbook.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/Pawn.h"
 #include "PacEntity.generated.h"
@@ -12,33 +11,24 @@ UCLASS()
 class PACMAN_GROUPE5_API APacEntity : public APawn
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	class UBoxComponent* BoxCollision;
+
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	// class UStaticMeshComponent* StaticMesh;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UPaperFlipbookComponent* FlipbookComponent;
+
+	UPROPERTY(Category = Pawn,  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPawnMovementComponent* MovementComponent;
+
 public:
 	// Sets default values for this pawn's properties
 	APacEntity();
 
-	UPROPERTY(EditAnywhere)
-	class UBoxComponent* BoxCollision;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	//class UStaticMeshComponent* StaticMesh;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UPaperFlipbookComponent* FlipbookComponent;
-	
-	UPROPERTY(Category = Pawn,  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UPawnMovementComponent* MovementComponent;
-
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	class UPaperFlipbook* FlipbookUp;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	class UPaperFlipbook* FlipbookDown;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	class UPaperFlipbook* FlipbookLeft;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animations")
-	class UPaperFlipbook* FlipbookRight;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
