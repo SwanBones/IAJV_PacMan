@@ -33,7 +33,7 @@ void AGhostAIController::OnPossess(APawn* InPawn)
 	}
 }
 
-void AGhostAIController::OnMoveCompleted(const FAIRequestID RequestID, const FPathFollowingResult& Result)
+/*void AGhostAIController::OnMoveCompleted(const FAIRequestID RequestID, const FPathFollowingResult& Result)
 {
 	Super::OnMoveCompleted(RequestID, Result);
 
@@ -48,4 +48,4 @@ void AGhostAIController::OnMoveCompleted(const FAIRequestID RequestID, const FPa
 			MyGhost->SetAliveMode();  // Remettre le fantôme en mode "Alive"
 		}
 	}
-}
+}*/
