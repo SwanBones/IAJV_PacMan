@@ -24,7 +24,7 @@ void AGhost::SetAliveMode()
 	// Clear TimerHandler
 	GetWorldTimerManager().ClearTimer(TimerHandle);
 	UFloatingPawnMovement* FloatingMovement = Cast<UFloatingPawnMovement>(MovementComponent);
-	FloatingMovement->MaxSpeed = 700.0f;
+	FloatingMovement->MaxSpeed = 900.0f;
 	// Debug message for test purpose
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("SetAlive"));
 
@@ -40,6 +40,14 @@ void AGhost::SetAliveMode()
 	} 
 }
 
+// DEPRECATED 
+void AGhost::SetAliveTimer()
+{
+	GetWorldTimerManager().ClearTimer(TimerHandle);
+	// Setup un timer de 2s qui appel SetAliveMode() quand résolue
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AGhost::SetAliveMode, 2.0f, false);
+}
+
 void AGhost::SetDeadMode()
 {
 	// Either dead or frighten not both
@@ -49,7 +57,6 @@ void AGhost::SetDeadMode()
 	FlipbookComponent->SetFlipbook(DeadFlipbookRight);
 	// Clear timer so don't come back alive in middle of comming back to respawn
 	GetWorldTimerManager().ClearTimer(TimerHandle);
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AGhost::SetAliveMode, 7.0f, false);
 	UFloatingPawnMovement* FloatingMovement = Cast<UFloatingPawnMovement>(MovementComponent);
 	FloatingMovement->MaxSpeed = 1200.0f;
 	
